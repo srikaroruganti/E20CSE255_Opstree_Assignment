@@ -1,0 +1,104 @@
+# Define a Node class for each element in the linked list
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+
+# Define a LinkedList class to manage the list operations
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    # Method to insert a number into the linked list
+    def insert(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+    
+    # Method to print the linked list
+    def print_list(self):
+        current = self.head
+        while current is not None:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    
+    # Method to sort the linked list in ascending order (Bubble Sort)
+    def sort_ascending(self):
+        if self.head is None or self.head.next is None:
+            return
+        
+        current = self.head
+        while current is not None:
+            next_node = current.next
+            while next_node is not None:
+                if current.data > next_node.data:
+                    # Swap data
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
+            current = current.next
+    
+    # Method to sort the linked list in descending order
+    def sort_descending(self):
+        if self.head is None or self.head.next is None:
+            return
+        
+        current = self.head
+        while current is not None:
+            next_node = current.next
+            while next_node is not None:
+                if current.data < next_node.data:
+                    # Swap data
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
+            current = current.next
+    
+    # Method to search for a specific number in the linked list
+    def search(self, key):
+        current = self.head
+        while current is not None:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+
+# Main function to demonstrate the usage of the LinkedList class
+def main():
+    # Initialize an empty linked list
+    linked_list = LinkedList()
+    
+    # Take numbers as input and insert into the linked list
+    print("Enter numbers separated by space:")
+    numbers = list(map(int, input().split()))
+    for number in numbers:
+        linked_list.insert(number)
+    
+    # Print the original linked list
+    print("Original Linked List:")
+    linked_list.print_list()
+    
+    # Sort the linked list in ascending order and print
+    linked_list.sort_ascending()
+    print("Sorted Linked List (Ascending):")
+    linked_list.print_list()
+    
+    # Sort the linked list in descending order and print
+    linked_list.sort_descending()
+    print("Sorted Linked List (Descending):")
+    linked_list.print_list()
+    
+    # Perform a search for a specific number
+    print("Enter number to search:")
+    key = int(input())
+    if linked_list.search(key):
+        print(f"{key} is present in the linked list.")
+    else:
+        print(f"{key} is not present in the linked list.")
+
+if __name__ == "__main__":
+    main()
